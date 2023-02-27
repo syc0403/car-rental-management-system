@@ -1,8 +1,8 @@
 package bootstrap
 
 import (
+	"car-rental-management-system/global"
 	"context"
-	"gin-example/global"
 	"strconv"
 
 	"github.com/go-redis/redis/v8"

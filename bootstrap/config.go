@@ -1,8 +1,8 @@
 package bootstrap
 
 import (
+	"car-rental-management-system/global"
 	"fmt"
-	"gin-example/global"
 	"os"
 
 	"github.com/fsnotify/fsnotify"

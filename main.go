@@ -1,8 +1,8 @@
 package main
 
 import (
-	"gin-example/bootstrap"
-	"gin-example/global"
+	"car-rental-management-system/bootstrap"
+	"car-rental-management-system/global"
 )
 
 func main() {

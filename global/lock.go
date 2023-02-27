@@ -1,8 +1,8 @@
 package global
 
 import (
+	"car-rental-management-system/utils"
 	"context"
-	"gin-example/utils"
 	"time"
 
 	"github.com/go-redis/redis/v8"

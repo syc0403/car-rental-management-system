@@ -1,9 +1,9 @@
 package middleware
 
 import (
-	"gin-example/app/common/response"
-	"gin-example/app/services"
-	"gin-example/global"
+	"car-rental-management-system/app/common/response"
+	"car-rental-management-system/app/services"
+	"car-rental-management-system/global"
 	"strconv"
 	"time"
 

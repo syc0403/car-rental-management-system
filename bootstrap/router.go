@@ -1,9 +1,9 @@
 package bootstrap
 
 import (
+	"car-rental-management-system/global"
+	"car-rental-management-system/routes"
 	"context"
-	"gin-example/global"
-	"gin-example/routes"
 	"log"
 	"net/http"
 	"os"

@@ -1,7 +1,7 @@
 package bootstrap
 
 import (
-	"gin-example/utils"
+	"car-rental-management-system/utils"
 
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"

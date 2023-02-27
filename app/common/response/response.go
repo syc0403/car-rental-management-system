@@ -1,7 +1,7 @@
 package response
 
 import (
-	"gin-example/global"
+	"car-rental-management-system/global"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

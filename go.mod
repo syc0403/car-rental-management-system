@@ -1,4 +1,4 @@
-module gin-example
+module car-rental-management-system
 
 go 1.20
 

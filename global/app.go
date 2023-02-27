@@ -1,7 +1,7 @@
 package global
 
 import (
-	"gin-example/config"
+	"car-rental-management-system/config"
 
 	"github.com/go-redis/redis/v8"
 

@@ -1,4 +1,4 @@
-# gin-example
+# car-rental-management-system
 
 该项目是gin项目的模版，可以以该模版为基础进行开发
 
@@ -23,5 +23,5 @@ gorm.io/gorm
 
 1.使用config.yaml.example为模版配置config.yaml文件
 
-2.在gin-example目录下运行`go run main.go`
+2.在car-rental-management-system目录下运行`go run main.go`
 

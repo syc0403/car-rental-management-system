@@ -1,8 +1,8 @@
 package bootstrap
 
 import (
-	"gin-example/global"
-	"gin-example/utils"
+	"car-rental-management-system/global"
+	"car-rental-management-system/utils"
 	"os"
 	"time"
 

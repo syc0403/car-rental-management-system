@@ -1,10 +1,10 @@
 package routes
 
 import (
-	"gin-example/app/common/request"
-	"gin-example/app/controllers/app"
-	"gin-example/app/middleware"
-	"gin-example/app/services"
+	"car-rental-management-system/app/common/request"
+	"car-rental-management-system/app/controllers/app"
+	"car-rental-management-system/app/middleware"
+	"car-rental-management-system/app/services"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

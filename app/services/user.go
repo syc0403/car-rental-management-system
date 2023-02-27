@@ -1,11 +1,11 @@
 package services
 
 import (
+	"car-rental-management-system/app/common/request"
+	"car-rental-management-system/app/models"
+	"car-rental-management-system/global"
+	"car-rental-management-system/utils"
 	"errors"
-	"gin-example/app/common/request"
-	"gin-example/app/models"
-	"gin-example/global"
-	"gin-example/utils"
 	"strconv"
 )
 

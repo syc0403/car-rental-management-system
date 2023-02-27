@@ -1,10 +1,10 @@
 package services
 
 import (
+	"car-rental-management-system/global"
+	"car-rental-management-system/utils"
 	"context"
 	"errors"
-	"gin-example/global"
-	"gin-example/utils"
 	"strconv"
 	"time"
 
@@ -90,11 +90,11 @@ func (jwtService *jwtService) IsInBlacklist(tokenStr string) bool {
 }
 
 func (jwtService *jwtService) GetUserInfo(GuardName string, id string) (err error, user JwtUser) {
-    switch GuardName {
-    case AppGuardName:
-        return UserService.GetUserInfo(id)
-    default:
-        err = errors.New("guard " + GuardName +" does not exist")
-    }
-    return
+	switch GuardName {
+	case AppGuardName:
+		return UserService.GetUserInfo(id)
+	default:
+		err = errors.New("guard " + GuardName + " does not exist")
+	}
+	return
 }

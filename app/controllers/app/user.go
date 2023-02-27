@@ -1,9 +1,9 @@
 package app
 
 import (
-	"gin-example/app/common/request"
-	"gin-example/app/common/response"
-	"gin-example/app/services"
+	"car-rental-management-system/app/common/request"
+	"car-rental-management-system/app/common/response"
+	"car-rental-management-system/app/services"
 
 	"github.com/gin-gonic/gin"
 )
