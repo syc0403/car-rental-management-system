@@ -12,6 +12,7 @@ type ID struct {
 
 // 创建、更新时间
 type Timestamps struct {
+    gorm.Model
     CreatedAt time.Time `json:"created_at"`
     UpdatedAt time.Time `json:"updated_at"`
 }
