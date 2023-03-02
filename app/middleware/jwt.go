@@ -48,7 +48,7 @@ func JWTAuth(GuardName string) gin.HandlerFunc {
 					lock.Release()
 				} else {
 					tokenData, _, _ := services.JwtService.CreateToken(GuardName, user)
-					c.Header("new-token", tokenData.AccessToken)
+					c.Header("new-token", tokenData.Token)
 					c.Header("new-expires-in", strconv.Itoa(tokenData.ExpiresIn))
 					_ = services.JwtService.JoinBlackList(token)
 				}

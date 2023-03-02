@@ -32,7 +32,7 @@ const (
 )
 
 type TokenOutPut struct {
-	AccessToken string `json:"access_token"`
+	Token string `json:"token"`
 	ExpiresIn   int    `json:"expires_in"`
 	TokenType   string `json:"token_type"`
 }

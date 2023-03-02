@@ -7,8 +7,8 @@ type Register struct {
 }
 
 type Login struct {
-	Phone    string `form:"phone" json:"phone" binding:"required,phone"`
-	Password string `form:"password" json:"password" binding:"required"`
+	LoginName string `form:"login_name" json:"login_name" binding:"required"`
+	Password  string `form:"password" json:"password" binding:"required"`
 }
 
 func (register Register) GetMessages() ValidatorMessages {
@@ -21,8 +21,7 @@ func (register Register) GetMessages() ValidatorMessages {
 }
 func (login Login) GetMessages() ValidatorMessages {
 	return ValidatorMessages{
-		"phone.required":    "手机号码不能为空",
-		"phone.phone":       "手机号码格式不正确",
-		"password.required": "用户密码不能为空",
+		"login_name.required": "用户名不能为空",
+		"password.required":   "用户密码不能为空",
 	}
 }
