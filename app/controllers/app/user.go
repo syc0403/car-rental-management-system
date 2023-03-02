@@ -31,3 +31,5 @@ func Info(c *gin.Context) {
 	}
 	response.Success(c, user)
 }
+
+
