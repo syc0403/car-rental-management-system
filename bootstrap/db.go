@@ -107,6 +107,9 @@ func getGormLogWriter() logger.Writer {
 func initMySqlTables(db *gorm.DB) {
 	err := db.AutoMigrate(
 		models.User{},
+		models.Car{},
+		models.Customer{},
+		models.RentOrder{},
 	)
 	if err != nil {
 		global.App.Log.Error("migrate table failed", zap.Any("err", err))
