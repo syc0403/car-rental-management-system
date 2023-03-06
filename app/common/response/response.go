@@ -20,7 +20,7 @@ func Success(c *gin.Context, data interface{}) {
 	c.JSON(http.StatusOK, Response{
 		200,
 		data,
-		"ok",
+		"success",
 	})
 }
 
