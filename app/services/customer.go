@@ -5,6 +5,8 @@ import (
 	"car-rental-management-system/app/models"
 	"car-rental-management-system/global"
 	"car-rental-management-system/utils"
+	"errors"
+	"strconv"
 )
 
 type customerService struct {
@@ -22,4 +24,46 @@ func (customerService *customerService) GetAllCustomerInfo(query *request.Pagina
 	err = db.Scopes(utils.Paginate(query.Current, query.PageSize)).Order("created_at desc").Find(&customer).Error
 	return err, total, customer
 
+}
+
+// GetCustomerInfoById 根据用户id获取客户信息
+func (customerService *customerService) GetCustomerInfoById(id string) (err error, customer models.Customer) {
+	err = global.App.DB.Where("id = ?", id).First(&customer).Error
+	return
+
+}
+
+// AddCustomer 添加客户
+func (customerService *customerService) AddCustomer(query *models.Customer) (err error, customer models.Customer) {
+	if err = global.App.DB.Create(&query).Error; err != nil {
+		err = errors.New("添加客户失败")
+		return
+	}
+	err = global.App.DB.Where("id = ?", query.ID).First(&customer).Error
+	return
+}
+
+// DeteleCustomer 删除客户
+func (customerService *customerService) DeteleCustomer(id string) (err error, customer models.Customer) {
+	customerId, err := strconv.Atoi(id)
+	if err = global.App.DB.First(&customer, customerId).Error; err != nil {
+		err = errors.New("用户不存在")
+		return
+	}
+
+	err = global.App.DB.Model(&customer).Where("id=?", customerId).Delete(&customer).Error
+	if err != nil {
+		err = errors.New("删除失败")
+	}
+	return
+}
+
+// UpdateCustomerInfo 修改客户信息
+func (customerService *customerService) UpdateCustomerInfo(params *models.Customer) (err error, customer models.Customer) {
+	if err = global.App.DB.Model(&customer).Where("id=?", params.ID).Updates(&params).Error; err != nil {
+		err = errors.New("修改客户信息失败")
+		return
+	}
+	err = global.App.DB.Where("id = ?", params.ID).First(&customer).Error
+	return
 }
