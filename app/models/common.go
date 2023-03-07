@@ -6,9 +6,9 @@ import (
 	"gorm.io/gorm"
 )
 
-// 自增ID主键
+// 自增ID主键s
 type ID struct {
-	ID int32 `json:"id" gorm:"primaryKey"`
+	ID int `json:"id" gorm:"type:int(11);primaryKey"`
 }
 
 // 创建、更新时间
