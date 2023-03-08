@@ -86,3 +86,26 @@ func UpdateCustomerInfo(c *gin.Context) {
 		response.Success(c, customer)
 	}
 }
+
+// GetCustomerInfoByName 根据用户姓名模糊查询客户信息
+func GetCustomerInfoByName(c *gin.Context) {
+	var query request.GetCustomerInfoByName
+	if err := c.ShouldBindJSON(&query); err != nil {
+		response.ValidateFail(c, request.GetErrorMsg(query, err))
+		return
+	}
+	err, total, customer := services.CustomerService.GetCustomerInfoByName(&query)
+	if err != nil {
+		response.BusinessFail(c, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"code":    200,
+		"message": "success",
+		"data": map[string]interface{}{
+			"data":     customer,
+			"total":    total,
+			"page":     query.Current,
+			"pageSize": query.PageSize,
+		}})
+}

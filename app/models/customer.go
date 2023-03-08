@@ -13,7 +13,7 @@ type Customer struct {
 	Identity     string         `json:"identity" gorm:"type:varchar(255);comment:身份证"`
 	Sex          int            `json:"sex" gorm:"type:int(1);default:0;comment:性别(0:男,1:女)"`
 	Address      string         `json:"address" gorm:"type:varchar(255);comment:地址"`
-	Position     string         `json:"position" gorm:"type:varchar(255);comment:职业"`
+	Occupation   string         `json:"occupation" gorm:"type:varchar(255);comment:职业"`
 	ImgUrl       string         `json:"img_url" gorm:"type:varchar(255)"`
 	CreatedAt    time.Time      `json:"created_at"`
 	UpdatedAt    time.Time      `json:"updated_at"`

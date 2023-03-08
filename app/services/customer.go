@@ -67,3 +67,15 @@ func (customerService *customerService) UpdateCustomerInfo(params *models.Custom
 	err = global.App.DB.Where("id = ?", params.ID).First(&customer).Error
 	return
 }
+
+// GetCustomerInfoByName 根据用户姓名模糊查询客户信息
+func (customerService *customerService) GetCustomerInfoByName(query *request.GetCustomerInfoByName) (err error, total int64, customer []models.Customer) {
+	db := global.App.DB.Model(&customer)
+	err = db.Where("deleted_at is null").Where("customer_name like ? ", "%"+query.CustomerName+"%").Count(&total).Error
+	if err != nil {
+		return err, 0, nil
+	}
+	err = db.Scopes(utils.Paginate(query.Current, query.PageSize)).Where("customer_name like ? ", "%"+query.CustomerName+"%").Order("created_at desc").Find(&customer).Error
+	return err, total, customer
+
+}
