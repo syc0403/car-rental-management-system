@@ -13,7 +13,7 @@ const basemanagementRouter = {
         {
           path: 'customermanagement',
           component: () => import('@/views/basemanagement/customermanagement/index'), // Parent router-view
-          name: '客户管理',
+          name: 'CustomerManagement',
           meta: { title: '客户管理' },
         },
         {

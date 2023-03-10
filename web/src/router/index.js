@@ -49,13 +49,15 @@ export const constantRoutes = [
     path: '/',
     component: Layout,
     redirect: '/dashboard',
-    children: [{
+    children: [
+     {
       path: 'dashboard',
-      name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '首页', icon: 'dashboard' }
-    }]
-  },
+      name: 'dashboard',
+      meta: { title: '首页', icon: 'dashboard', affix: true }
+     }
+    ]
+   },
   basemanagementRouter,
   nestedRouter,
 

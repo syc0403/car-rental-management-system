@@ -30,10 +30,16 @@
       </el-button>
     </div>
     <el-table :data="tableData" border style="width: 100%">
-      <el-table-column type="index" width="70" label="序号" align="center"> </el-table-column>
+      <el-table-column type="index" width="70" label="序号" align="center">
+      </el-table-column>
       <el-table-column prop="id" label="id" width="70" align="center">
       </el-table-column>
-      <el-table-column prop="customer_name" label="客户姓名" width="100" align="center">
+      <el-table-column
+        prop="customer_name"
+        label="客户姓名"
+        width="70"
+        align="center"
+      >
       </el-table-column>
       <el-table-column prop="phone" label="电话" align="center">
       </el-table-column>
@@ -171,6 +177,7 @@
 import { dataTimeFormatter } from "@/utils/utils";
 import { get, post } from "@/utils/requests";
 export default {
+  name: "CustomerManagement",
   components: {},
   data() {
     return {
