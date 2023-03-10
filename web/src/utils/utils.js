@@ -135,7 +135,7 @@ function deadline(timeStamp) {
 	}
 
 }
-function dataTimeFormatter(v){
+function dataTimeFormatter(v) {
 	let date = new Date(v);
 	let y = date.getFullYear();
 	let MM = date.getMonth() + 1;
@@ -149,5 +149,24 @@ function dataTimeFormatter(v){
 	let s = date.getSeconds();
 	s = s < 10 ? "0" + s : s;
 	return y + "-" + MM + "-" + d + " " + h + ":" + m + ":" + s;
-  }
-export { formatTime, dateDiff, getTimeStamp, remainTime, deadline,dataTimeFormatter }
+}
+
+function scientificToNumber(num) {
+	var str = num.toString();
+	var reg = /^(\d+)(e)([\-]?\d+)$/;
+	var arr, len,
+		zero = '';
+	/*6e7或6e+7 都会自动转换数值*/
+	if (!reg.test(str)) {
+		return num;
+	} else {
+		/*6e-7 需要手动转换*/
+		arr = reg.exec(str);
+		len = Math.abs(arr[3]) - 1;
+		for (var i = 0; i < len; i++) {
+			zero += '0';
+		}
+		return '0.' + zero + arr[1];
+	}
+}
+export { formatTime, dateDiff, getTimeStamp, remainTime, deadline, dataTimeFormatter, scientificToNumber }

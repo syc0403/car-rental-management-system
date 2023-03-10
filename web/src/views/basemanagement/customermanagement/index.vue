@@ -1,74 +1,79 @@
 <template>
   <div>
     <!-- 混合查询 -->
-    <div class="lookup">
-      <div style="width: 40">
-        <el-input
-          placeholder="请输入客户姓名"
-          prefix-icon="el-icon-search"
-          v-model="customerName"
+    <el-header>
+      <div class="lookup">
+        <div style="width: 40">
+          <el-input
+            placeholder="请输入客户姓名"
+            prefix-icon="el-icon-search"
+            v-model="customerName"
+          >
+          </el-input>
+        </div>
+        <el-button
+          class="btns"
+          type="primary"
+          icon="el-icon-search"
+          @click="getCustomerList()"
         >
-        </el-input>
+          查找
+        </el-button>
+        <el-button
+          class="btns"
+          type="primary"
+          icon="el-icon-circle-plus-outline"
+          @click="dialogAdd = true"
+        >
+          添加
+        </el-button>
       </div>
-      <el-button
-        class="btns"
-        size="small"
-        type="primary"
-        icon="el-icon-search"
-        @click="getCustomerList()"
-      >
-        查找
-      </el-button>
-      <el-button
-        class="btns"
-        size="small"
-        type="primary"
-        icon="el-icon-circle-plus-outline"
-        @click="dialogAdd = true"
-      >
-        添加
-      </el-button>
-    </div>
-    <el-table :data="tableData" border style="width: 100%">
-      <el-table-column type="index" width="70" label="序号" align="center">
-      </el-table-column>
-      <el-table-column prop="id" label="id" width="70" align="center">
-      </el-table-column>
-      <el-table-column
-        prop="customer_name"
-        label="客户姓名"
-        width="70"
-        align="center"
-      >
-      </el-table-column>
-      <el-table-column prop="phone" label="电话" align="center">
-      </el-table-column>
-      <el-table-column prop="identity" label="身份证" align="center">
-      </el-table-column>
-      <el-table-column label="性别" width="70" align="center">
-        <template slot-scope="scope">{{
-          scope.row.sex === 0 ? "男" : "女"
-        }}</template>
-      </el-table-column>
-      <el-table-column prop="address" label="地址" align="center">
-      </el-table-column>
-      <el-table-column prop="occupation" label="职业" align="center">
-      </el-table-column>
-      <el-table-column prop="created_at" label="创建时间" align="center">
-      </el-table-column>
-      <el-table-column prop="updated_at" label="更新时间" align="center">
-      </el-table-column>
-      <el-table-column label="操作" align="center">
-        <template slot-scope="scope">
-          <el-button size="mini" type="primary" @click="editData(scope.row)"
-            >编辑</el-button
-          >
-          <el-button size="mini" type="danger" @click="deleteData(scope.row.id)"
-            >删除</el-button
-          >
-        </template>
-      </el-table-column>
-    </el-table>
+    </el-header>
+    <el-main>
+      <el-table :data="tableData" border style="width: 100%">
+        <el-table-column type="index" width="70" label="序号" align="center">
+        </el-table-column>
+        <el-table-column prop="id" label="id" width="70" align="center">
+        </el-table-column>
+        <el-table-column
+          prop="customer_name"
+          label="客户姓名"
+          width="70"
+          align="center"
+        >
+        </el-table-column>
+        <el-table-column prop="phone" label="电话" align="center">
+        </el-table-column>
+        <el-table-column prop="identity" label="身份证" align="center">
+        </el-table-column>
+        <el-table-column label="性别" width="70" align="center">
+          <template slot-scope="scope">{{
+            scope.row.sex === 0 ? "男" : "女"
+          }}</template>
+        </el-table-column>
+        <el-table-column prop="address" label="地址" align="center">
+        </el-table-column>
+        <el-table-column prop="occupation" label="职业" align="center">
+        </el-table-column>
+        <el-table-column prop="created_at" label="创建时间" align="center">
+        </el-table-column>
+        <el-table-column prop="updated_at" label="更新时间" align="center">
+        </el-table-column>
+        <el-table-column label="操作" align="center">
+          <template slot-scope="scope">
+            <el-button size="mini" type="primary" @click="editData(scope.row)"
+              >编辑</el-button
+            >
+            <el-button
+              size="mini"
+              type="danger"
+              @click="deleteData(scope.row.id)"
+              >删除</el-button
+            >
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-main>
     <el-dialog title="添加客户" :visible.sync="dialogAdd" width="30%">
       <el-form ref="newData" :model="newData" label-width="80px">
         <el-form-item label="姓名">
@@ -160,16 +165,18 @@
       </span>
     </el-dialog>
     <!-- 分页 -->
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="page.current"
-      :page-sizes="[1, 10, 20]"
-      :page-size="page.size"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="total"
-    >
-    </el-pagination>
+    <el-footer>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="page.current"
+        :page-sizes="[1, 10, 20]"
+        :page-size="page.size"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+      >
+      </el-pagination>
+    </el-footer>
   </div>
 </template>
 
@@ -328,7 +335,7 @@ export default {
 <style scoped>
 .lookup {
   display: flex;
-  margin: 20px 20px;
+  margin: 20px;
 }
 .aInput {
   width: 70%;
