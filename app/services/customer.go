@@ -60,6 +60,12 @@ func (customerService *customerService) DeteleCustomer(id string) (err error, cu
 
 // UpdateCustomerInfo 修改客户信息
 func (customerService *customerService) UpdateCustomerInfo(params *models.Customer) (err error, customer models.Customer) {
+	if params.Sex != 1 {
+		if err = global.App.DB.Model(&customer).Where("id=?", params.ID).Update("sex", 0).Error; err != nil {
+			err = errors.New("修改客户信息失败")
+			return
+		}
+	}
 	if err = global.App.DB.Model(&customer).Where("id=?", params.ID).Updates(&params).Error; err != nil {
 		err = errors.New("修改客户信息失败")
 		return
