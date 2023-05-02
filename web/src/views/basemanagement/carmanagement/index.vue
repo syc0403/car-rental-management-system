@@ -33,9 +33,9 @@
     </el-header>
     <el-main>
       <el-table :data="tableData" border style="width: 100%">
-        <el-table-column type="index" width="70" label="序号" align="center">
+        <el-table-column type="index" width="50" label="序号" align="center">
         </el-table-column>
-        <el-table-column prop="id" label="id" width="70" align="center">
+        <el-table-column prop="id" label="id" width="50" align="center">
         </el-table-column>
         <el-table-column
           prop="car_number"
@@ -63,7 +63,7 @@
         </el-table-column>
         <el-table-column prop="updated_at" label="更新时间" align="center">
         </el-table-column>
-        <el-table-column label="操作" align="center">
+        <el-table-column label="操作" width="150" align="center">
           <template slot-scope="scope">
             <el-button size="mini" type="primary" @click="editData(scope.row)"
               >编辑</el-button
