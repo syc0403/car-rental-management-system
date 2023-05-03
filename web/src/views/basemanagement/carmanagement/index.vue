@@ -35,8 +35,6 @@
       <el-table :data="tableData" border style="width: 100%">
         <el-table-column type="index" width="50" label="序号" align="center">
         </el-table-column>
-        <el-table-column prop="id" label="id" width="50" align="center">
-        </el-table-column>
         <el-table-column
           prop="car_number"
           label="车牌号"
