@@ -4,29 +4,14 @@
     <el-header>
       <div style="display: flex; margin: 20px">
         <div style="width: 40">
-          <el-input
-            placeholder="请输入车牌号"
-            prefix-icon="el-icon-search"
-            v-model="carNumber"
-          >
+          <el-input placeholder="请输入车牌号" prefix-icon="el-icon-search" v-model="carNumber">
           </el-input>
         </div>
-        <el-button
-          class="btns"
-          type="primary"
-          icon="el-icon-search"
-          style="margin-left: 10px"
-          @click="getDataList()"
-        >
+        <el-button class="btns" type="primary" icon="el-icon-search" style="margin-left: 10px" @click="getDataList()">
           查找
         </el-button>
-        <el-button
-          class="btns"
-          type="primary"
-          icon="el-icon-circle-plus-outline"
-          style="margin-left: 10px"
-          @click="dialogAdd = true"
-        >
+        <el-button class="btns" type="primary" icon="el-icon-circle-plus-outline" style="margin-left: 10px"
+          @click="dialogAdd = true">
           添加
         </el-button>
       </div>
@@ -35,12 +20,7 @@
       <el-table :data="tableData" border style="width: 100%">
         <el-table-column type="index" width="50" label="序号" align="center">
         </el-table-column>
-        <el-table-column
-          prop="car_number"
-          label="车牌号"
-          width="100"
-          align="center"
-        >
+        <el-table-column prop="car_number" label="车牌号" width="100" align="center">
         </el-table-column>
         <el-table-column prop="car_type" label="品牌" align="center">
         </el-table-column>
@@ -52,6 +32,22 @@
         </el-table-column>
         <el-table-column prop="deposit" label="押金" align="center">
         </el-table-column>
+        <el-table-column label="缩略图" width="200">
+          <template slot-scope="scope">
+            <!-- trigger(触发方式)、placement(出现位置) -->
+            <el-popover trigger="hover" placement="right">
+              <!-- table中原本显示的图片 -->
+              <img slot="reference"
+                src="https://images.weserv.nl/?url=http://43.136.71.96:443/images/1.png"
+                alt="https://images.weserv.nl/?url=http://43.136.71.96:443/images/1.png"
+                style="width: 100px;height: 100px;">
+              <!-- 鼠标移入时弹出的图片 -->
+              <img src="https://images.weserv.nl/?url=http://43.136.71.96:443/images/1.png"
+                alt="" style="width: 500px;height: 500px;">
+            </el-popover>
+          </template>
+        </el-table-column>
+
         <el-table-column label="状态" width="70" align="center">
           <template slot-scope="scope">{{
             scope.row.is_renting === 0 ? "未租出" : "已租出"
@@ -63,15 +59,8 @@
         </el-table-column>
         <el-table-column label="操作" width="150" align="center">
           <template slot-scope="scope">
-            <el-button size="mini" type="primary" @click="editData(scope.row)"
-              >编辑</el-button
-            >
-            <el-button
-              size="mini"
-              type="danger"
-              @click="deleteData(scope.row.id)"
-              >删除</el-button
-            >
+            <el-button size="mini" type="primary" @click="editData(scope.row)">编辑</el-button>
+            <el-button size="mini" type="danger" @click="deleteData(scope.row.id)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -83,32 +72,27 @@
           </el-input>
         </el-form-item>
         <el-form-item label="品牌">
-          <el-input
-            v-model="newData.car_type"
-            placeholder="请输入品牌"
-          ></el-input>
+          <el-input v-model="newData.car_type" placeholder="请输入品牌"></el-input>
         </el-form-item>
         <el-form-item label="颜色">
           <el-input v-model="newData.color" placeholder="请输入颜色"></el-input>
         </el-form-item>
         <el-form-item label="车辆价格">
-          <el-input
-            v-model="newData.price"
-            placeholder="请输入车辆价格"
-          ></el-input>
+          <el-input v-model="newData.price" placeholder="请输入车辆价格"></el-input>
         </el-form-item>
         <el-form-item label="租金/天">
-          <el-input
-            v-model="newData.rent_price"
-            placeholder="请输入租金价格"
-          ></el-input>
+          <el-input v-model="newData.rent_price" placeholder="请输入租金价格"></el-input>
         </el-form-item>
         <el-form-item label="押金">
-          <el-input
-            v-model="newData.deposit"
-            placeholder="请输入押金"
-          ></el-input>
+          <el-input v-model="newData.deposit" placeholder="请输入押金"></el-input>
         </el-form-item>
+
+        <el-upload class="avatar-uploader" action="http://43.136.71.96:21/images/" :show-file-list="false"
+          :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload">
+          <img v-if="imageUrl" :src="imageUrl" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogAdd = false">取 消</el-button>
@@ -122,31 +106,19 @@
           </el-input>
         </el-form-item>
         <el-form-item label="品牌">
-          <el-input
-            v-model="editDataList.car_type"
-            placeholder="请输入品牌"
-          ></el-input>
+          <el-input v-model="editDataList.car_type" placeholder="请输入品牌"></el-input>
         </el-form-item>
         <el-form-item label="颜色">
           <el-input v-model="editDataList.color" placeholder="请输入颜色"></el-input>
         </el-form-item>
         <el-form-item label="车辆价格">
-          <el-input
-            v-model="editDataList.price"
-            placeholder="请输入车辆价格"
-          ></el-input>
+          <el-input v-model="editDataList.price" placeholder="请输入车辆价格"></el-input>
         </el-form-item>
         <el-form-item label="租金/天">
-          <el-input
-            v-model="editDataList.rent_price"
-            placeholder="请输入租金价格"
-          ></el-input>
+          <el-input v-model="editDataList.rent_price" placeholder="请输入租金价格"></el-input>
         </el-form-item>
         <el-form-item label="押金">
-          <el-input
-            v-model="editDataList.deposit"
-            placeholder="请输入押金"
-          ></el-input>
+          <el-input v-model="editDataList.deposit" placeholder="请输入押金"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -155,15 +127,8 @@
       </span>
     </el-dialog>
     <el-footer>
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="page.current"
-        :page-sizes="[1, 10, 20]"
-        :page-size="page.size"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-      >
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page.current"
+        :page-sizes="[1, 10, 20]" :page-size="page.size" layout="total, sizes, prev, pager, next, jumper" :total="total">
       </el-pagination>
     </el-footer>
   </div>
@@ -191,6 +156,7 @@ export default {
         description: "",
         price: "",
         rent_price: "",
+        img_url: "",
       },
       editDataList: {
         car_number: "",
@@ -200,14 +166,32 @@ export default {
         description: "",
         price: "",
         rent_price: "",
+        img_url: "",
       },
       dialogAdd: false,
       dialogEdit: false,
+      imageUrl: '',
     };
+
   },
   computed: {},
   watch: {},
   methods: {
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return isJPG && isLt2M;
+    },
     // 分页显示数量
     handleSizeChange(newSize) {
       this.page.size = newSize;
@@ -246,6 +230,7 @@ export default {
       this.editDataList.description = data.description;
       this.editDataList.price = data.price;
       this.editDataList.rent_price = data.rent_price;
+      this.editDataList.img_url = data.img_url;
       this.dialogEdit = true;
     },
     async deleteData(id) {
@@ -318,8 +303,34 @@ export default {
   created() {
     this.getDataList();
   },
-  mounted() {},
+  mounted() { },
 };
 </script>
 <style>
-</style>
+.avatar-uploader .el-upload {
+  margin-left: 30%;
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}</style>
