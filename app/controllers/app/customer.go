@@ -94,7 +94,7 @@ func GetCustomerInfoByName(c *gin.Context) {
 		response.ValidateFail(c, request.GetErrorMsg(query, err))
 		return
 	}
-	err, total, customer := services.CustomerService.GetCustomerInfoByName(&query)
+	total, customer, err := services.CustomerService.GetCustomerInfoByName(&query)
 	if err != nil {
 		response.BusinessFail(c, err.Error())
 		return
