@@ -92,3 +92,14 @@ func AddRentOrder(c *gin.Context) {
 	}
 
 }
+
+// DeteleRentOrder 删除订单
+func DeteleRentOrder(c *gin.Context) {
+	RentOrderId := c.Query("id")
+	rentOrde, err := services.RentOrderService.DeteleRentOrder(RentOrderId)
+	if err != nil {
+		response.BusinessFail(c, err.Error())
+		return
+	}
+	response.Success(c, rentOrde)
+}

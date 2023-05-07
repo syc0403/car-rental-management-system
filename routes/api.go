@@ -41,6 +41,7 @@ func SetApiGroupRoutes(router *gin.RouterGroup) {
 		router.POST("/rentOrder/getrentorderby", app.GetRentOrderBy)
 		router.GET("/rentOrder/createrentidentity", app.CreateRentIdentity)
 		router.POST("/rentOrder/AddRentOrder", app.AddRentOrder)
+		router.GET("/rentOrder/deleteRentOrder", app.DeteleRentOrder)
 
 	}
 

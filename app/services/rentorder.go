@@ -7,6 +7,7 @@ import (
 	"car-rental-management-system/utils"
 	"errors"
 	"fmt"
+	"strconv"
 	"time"
 )
 
@@ -33,7 +34,7 @@ func (rentOrderService *rentOrderService) GetRentOrderBy(query *request.GetAllRe
 	var customerId int
 	db.Table("customers").Select("id").Where("identity = ?", query.CustomerIdentity).Scan(&customerId)
 	db = global.App.DB.Model(&rentOrder)
-	err = db.Where("deleted_at is null").Where("customer_id = ? or identity like ? or car_number like ?", customerId, query.Identity, query.CarNumber).Where("status = ?", query.Status).Count(&total).Error
+	err = db.Where("deleted_at is null").Where("customer_id = ? or identity like ? or car_number like ? or status = ?", customerId, query.Identity, query.CarNumber, query.Status).Where("status = ?", query.Status).Count(&total).Error
 	if err != nil {
 		return 0, nil, err
 	}
@@ -57,5 +58,19 @@ func (rentOrderService *rentOrderService) AddRentOrder(query *models.RentOrder) 
 		return
 	}
 	err = global.App.DB.Where("id = ?", query.ID).First(&rentOrde).Error
+	return
+}
+
+// DeteleRentOrder 删除订单
+func (rentOrderService *rentOrderService) DeteleRentOrder(id string) (rentOrde models.RentOrder, err error) {
+	RentOrderId, _ := strconv.Atoi(id)
+	if err = global.App.DB.First(&rentOrde, RentOrderId).Error; err != nil {
+		err = errors.New("订单不存在")
+		return
+	}
+	err = global.App.DB.Model(&rentOrde).Where("id=?", RentOrderId).Delete(&rentOrde).Error
+	if err != nil {
+		err = errors.New("删除失败")
+	}
 	return
 }
