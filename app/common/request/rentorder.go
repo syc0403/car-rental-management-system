@@ -6,4 +6,10 @@ type GetAllRentOrder struct {
 	Identity         string `json:"identity"`
 	CarNumber        string `json:"car_number"`
 	CustomerIdentity string `json:"customer_identity"`
+	Status           int    `json:"status"`
+}
+
+type CreateRentIdentity struct {
+	CarNumber        string `json:"car_number"`
+	CustomerIdentity string `json:"customer_identity"`
 }

@@ -109,3 +109,15 @@ func GetCustomerInfoByName(c *gin.Context) {
 			"pageSize": query.PageSize,
 		}})
 }
+
+// GetCustomerInfoByIdentity 根据身份证获取客户信息
+func GetCustomerInfoByIdentity(c *gin.Context) {
+	customerId := c.Query("identity")
+	err, customer := services.CustomerService.GetCustomerInfoByIdentity(customerId)
+	if err != nil {
+		response.BusinessFail(c, err.Error())
+		return
+	} else {
+		response.Success(c, customer)
+	}
+}

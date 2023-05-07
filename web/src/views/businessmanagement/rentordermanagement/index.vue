@@ -21,7 +21,7 @@
                 </div>
                 <div style="margin:10px;">
                     <el-radio label="1">已归还</el-radio>
-                    <el-radio label="2">未归还</el-radio>
+                    <el-radio label="0">未归还</el-radio>
                 </div>
                 <el-button class="btns" type="primary" icon="el-icon-search" style="margin-left: 10px"
                     @click="getDataList()">
@@ -70,7 +70,8 @@
 </template>
 
 <script>
-
+import { dataTimeFormatter } from "@/utils/utils";
+import { get, post } from "@/utils/requests";
 export default {
     components: {},
     data() {
@@ -80,6 +81,7 @@ export default {
                 size: 10, // 显示数量
             },
             total: 0,
+            tableData: [],
         };
     },
     computed: {},
@@ -95,9 +97,29 @@ export default {
             this.page.current = newPage;
             this.getDataList();
         },
+        async getDataList() {
+            let params = {
+                current: this.page.current,
+                pageSize: this.page.size,
+            };
+            const { data } = await get("/rentOrder/getallrentorder", params);
+            this.tableData = data.data.data;
+            this.total = data.data.total;
+            for (let i = 0; i < this.tableData.length; i++) {
+                this.tableData[i].created_at = dataTimeFormatter(
+                    this.tableData[i].created_at
+                );
+                this.tableData[i].updated_at = dataTimeFormatter(
+                    this.tableData[i].updated_at
+                );
+                this.tableData[i].customer_name = (await get("/customer/getcustomerinfobyid?id=" + this.tableData[i].customer_id)).data.data.customer_name;
+            }
+            console.log(this.tableData);
+
+        },
     },
     created() {
-
+        this.getDataList()
     },
     mounted() {
 

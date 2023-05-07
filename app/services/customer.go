@@ -83,3 +83,10 @@ func (customerService *customerService) GetCustomerInfoByName(query *request.Get
 	return total, customer, err
 
 }
+
+// GetCustomerInfoByIdentity 根据身份证获取客户信息
+func (customerService *customerService) GetCustomerInfoByIdentity(identity string) (err error, customer models.Customer) {
+	err = global.App.DB.Where("identity = ?", identity).First(&customer).Error
+	return
+
+}
