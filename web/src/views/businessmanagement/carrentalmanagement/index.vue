@@ -4,6 +4,7 @@
         <el-header>
             <hr class="hr">
             <div style="display: flex;">
+                <div style="display: flex;margin:10px;font-size: 18px;">身份证号：</div>
                 <div style="width: 40">
                     <el-input placeholder="请输入身份证号" prefix-icon="el-icon-search" v-model="IdNumber">
                     </el-input>
@@ -224,5 +225,15 @@ export default {
     white-space: nowrap;
     left: 50%;
     transform: translateX(-50%);
+}
+.lookup {
+  display: flex;
+  margin: 20px 20px;
+}
+.aInput {
+  width: 70%;
+}
+.btns {
+  margin-left: 10px;
 }
 </style>

@@ -41,7 +41,7 @@
                 </el-table-column>
                 <el-table-column label="状态" width="70" align="center">
                     <template slot-scope="scope">{{
-                        scope.row.is_renting === 1 ? "已归还" : "未归还"
+                        scope.row.status === 1 ? "未归还" : "已归还"
                     }}</template>
                 </el-table-column>
                 <el-table-column prop="begin_date" label="起租时间" align="center">
@@ -205,5 +205,15 @@ export default {
     white-space: nowrap;
     left: 50%;
     transform: translateX(-50%);
+}
+.lookup {
+  display: flex;
+  margin: 20px 20px;
+}
+.aInput {
+  width: 70%;
+}
+.btns {
+  margin-left: 10px;
 }
 </style>

@@ -22,7 +22,14 @@ const businessmanagement = {
           name: '出租单管理',
           component: () => import('@/views/businessmanagement/rentordermanagement/index'),
           meta: { title: '出租单管理' }
-        }
+        },
+        {
+          path: 'carstoragemanagement',
+          component: () => import('@/views/businessmanagement/carstoragemanagement/index'), // Parent router-view
+          name: '>>汽车入库',
+          meta: { title: '>>汽车入库'},
+          
+        },
       ]
 }
 

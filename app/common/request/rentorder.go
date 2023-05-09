@@ -13,3 +13,8 @@ type CreateRentIdentity struct {
 	CarNumber        string `json:"car_number"`
 	CustomerIdentity string `json:"customer_identity"`
 }
+
+type UpdateRentOrderStatus struct {
+	Identity string `json:"identity"`
+	Status   int    `json:"status"`
+}

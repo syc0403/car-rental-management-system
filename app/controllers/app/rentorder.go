@@ -103,3 +103,18 @@ func DeteleRentOrder(c *gin.Context) {
 	}
 	response.Success(c, rentOrde)
 }
+
+// UpdateRentOrderStatus 修改出租单状态
+func UpdateRentOrderStatus(c *gin.Context) {
+	var query request.UpdateRentOrderStatus
+	if err := c.ShouldBindJSON(&query); err != nil {
+		response.ValidateFail(c, request.GetErrorMsg(query, err))
+		return
+	}
+
+	if rentOrder, err := services.RentOrderService.UpdateRentOrder(&query); err != nil {
+		response.BusinessFail(c, err.Error())
+	} else {
+		response.Success(c, rentOrder)
+	}
+}

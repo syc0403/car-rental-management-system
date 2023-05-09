@@ -5,7 +5,6 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
-import nestedRouter from './modules/nested'
 import basemanagementRouter from './modules/basemanagement'
 import businessmanagement from './modules/businessmanagement'
 /**
@@ -50,17 +49,17 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/dashboard',
     children: [
-     {
-      path: 'dashboard',
-      component: () => import('@/views/dashboard/index'),
-      name: 'dashboard',
-      meta: { title: '首页', icon: 'dashboard', affix: true }
-     }
+      {
+        path: 'dashboard',
+        component: () => import('@/views/dashboard/index'),
+        name: 'dashboard',
+        meta: { title: '首页', icon: 'dashboard', affix: true }
+      }
     ]
-   },
+  },
   basemanagementRouter,
   businessmanagement,
-  
+
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

@@ -333,4 +333,6 @@ export default {
   width: 178px;
   height: 178px;
   display: block;
-}</style>
+}
+
+</style>

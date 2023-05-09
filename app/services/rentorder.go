@@ -34,7 +34,7 @@ func (rentOrderService *rentOrderService) GetRentOrderBy(query *request.GetAllRe
 	var customerId int
 	db.Table("customers").Select("id").Where("identity = ?", query.CustomerIdentity).Scan(&customerId)
 	db = global.App.DB.Model(&rentOrder)
-	err = db.Where("deleted_at is null").Where("customer_id = ? or identity like ? or car_number like ? or status = ?", customerId, query.Identity, query.CarNumber, query.Status).Where("status = ?", query.Status).Count(&total).Error
+	err = db.Where("deleted_at is null").Where("customer_id = ? or identity = ? or car_number = ? or status = ?", customerId, query.Identity, query.CarNumber, query.Status).Count(&total).Error
 	if err != nil {
 		return 0, nil, err
 	}
@@ -72,5 +72,15 @@ func (rentOrderService *rentOrderService) DeteleRentOrder(id string) (rentOrde m
 	if err != nil {
 		err = errors.New("删除失败")
 	}
+	return
+}
+
+// UpdateRentOrderStatus 修改出租单状态
+func (rentOrderService *rentOrderService) UpdateRentOrder(params *request.UpdateRentOrderStatus) (rentOrde models.RentOrder, err error) {
+	if err = global.App.DB.Model(&rentOrde).Where("identity=?", params.Identity).Update("status", params.Status).Error; err != nil {
+		err = errors.New("修改出租单状态失败")
+		return
+	}
+	err = global.App.DB.Where("identity = ?", params.Identity).First(&rentOrde).Error
 	return
 }
