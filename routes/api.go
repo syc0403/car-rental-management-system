@@ -17,7 +17,7 @@ func SetApiGroupRoutes(router *gin.RouterGroup) {
 	authRouter := router.Group("").Use(middleware.JWTAuth(services.AppGuardName))
 	{
 		router.POST("/user/updateuserinfo", app.UpdateUserInfo)
-		router.DELETE("/user/deleteuser", app.DeteleUser)
+		router.GET("/user/deleteuser", app.DeteleUser)
 		router.GET("/user/getalluserinfo", app.GetAllUserInfo)
 		authRouter.POST("/user/info", app.Info)
 		authRouter.POST("/user/logout", app.Logout)
@@ -54,6 +54,15 @@ func SetApiGroupRoutes(router *gin.RouterGroup) {
 		router.POST("/rentOrder/updatecheck", app.UpdateCheck)
 		router.GET("/check/getadresscount", app.GetAdressCount)
 		router.GET("/check/getoccupationcount", app.GetOccupationCount)
+
+		// GetAllRole 获取全部角色
+		router.GET("/role/getallrole", app.GetAllRole)
+		// AddRole 创建角色
+		router.POST("/role/addrole", app.AddRole)
+		// DeteleRole 删除角色
+		router.GET("/role/deleterole", app.DeteleRole)
+		// UpdateRole 修改角色信息
+		router.POST("/role/updaterole", app.UpdateRole)
 
 	}
 

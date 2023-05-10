@@ -8,6 +8,8 @@ import Layout from '@/layout'
 import basemanagementRouter from './modules/basemanagement'
 import businessmanagement from './modules/businessmanagement'
 import statisticalanalysis from './modules/statisticalanalysis'
+import systemmanagement from './modules/systemmanagement'
+
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -62,6 +64,7 @@ export const constantRoutes = [
   basemanagementRouter,
   businessmanagement,
   statisticalanalysis,
+  systemmanagement,
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
