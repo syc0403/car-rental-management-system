@@ -4,7 +4,7 @@
 </template>
 
 <script>
-
+import * as echarts from "echarts";
 export default {
 components: {},
 data() {
