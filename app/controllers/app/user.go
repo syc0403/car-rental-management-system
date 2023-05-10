@@ -27,7 +27,7 @@ func Register(c *gin.Context) {
 }
 
 func Info(c *gin.Context) {
-	err, user := services.UserService.GetUserInfo(c.Keys["id"].(string))
+	user, err := services.UserService.Info(c.Keys["id"].(string))
 	if err != nil {
 		response.BusinessFail(c, err.Error())
 		return

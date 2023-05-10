@@ -102,7 +102,7 @@ export default {
                 size: 10, // 显示数量
             },
             total: 0,
-            IdNumber: "360421199906242316",
+            IdNumber: "",
             tableData: [],
             dialogRenting: false,
             rentData: {

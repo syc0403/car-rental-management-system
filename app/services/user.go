@@ -2,6 +2,7 @@ package services
 
 import (
 	"car-rental-management-system/app/common/request"
+	"car-rental-management-system/app/common/response"
 	"car-rental-management-system/app/models"
 	"car-rental-management-system/global"
 	"car-rental-management-system/utils"
@@ -39,6 +40,18 @@ func (userService *userService) Login(params request.Login) (err error, user *mo
 func (userService *userService) GetUserInfo(id string) (err error, user models.User) {
 	intId, err := strconv.Atoi(id)
 	err = global.App.DB.First(&user, intId).Error
+	if err != nil {
+		err = errors.New("数据不存在")
+	}
+	return
+}
+
+// Info 获取用户信息
+func (userService *userService) Info(id string) (user response.GetUserInfo, err error) {
+	intId, err := strconv.Atoi(id)
+	db := global.App.DB
+	db.Table("users").Where("id = ?", intId).Scan(&user)
+	db.Table("roles").Select("roles").Where("user_type = ?", user.Type).Scan(&user.Roles)
 	if err != nil {
 		err = errors.New("数据不存在")
 	}
