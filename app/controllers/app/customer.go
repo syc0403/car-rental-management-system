@@ -121,3 +121,15 @@ func GetCustomerInfoByIdentity(c *gin.Context) {
 		response.Success(c, customer)
 	}
 }
+
+// GetCustomerByRentOrder 根据订单号获取客户信息
+func GetCustomerByRentOrder(c *gin.Context) {
+	rentOrderIdentity := c.Query("rentorder_identity")
+	customer, err := services.CustomerService.GetCustomerByRentOrder(rentOrderIdentity)
+	if err != nil {
+		response.BusinessFail(c, err.Error())
+		return
+	} else {
+		response.Success(c, customer)
+	}
+}

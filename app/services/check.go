@@ -49,3 +49,25 @@ func (checkService *checkService) DeteleCheck(id string) (check models.Check, er
 	}
 	return
 }
+
+// GetCheckBy 根据条件获取检查单信息
+func (checkService *checkService) GetCheckBy(query *request.GetCheckBy) (total int64, check []models.Check, err error) {
+	db := global.App.DB.Model(&check)
+	err = db.Where("deleted_at is null").Where("identity = ? or rent_order_identity = ?", query.CheckIdentity, query.RentOrderIdentity).Count(&total).Error
+	if err != nil {
+		return 0, nil, err
+	}
+	err = db.Scopes(utils.Paginate(query.Current, query.PageSize)).Where("identity = ? or rent_order_identity = ?", query.CheckIdentity, query.RentOrderIdentity).Order("created_at desc").Find(&check).Error
+	return total, check, err
+
+}
+
+// UpdateCheck 修改检查单信息
+func (checkService *checkService) UpdateCheck(params *models.Check) (check models.Check, err error) {
+	if err = global.App.DB.Model(&check).Where("id=?", params.ID).Updates(&params).Error; err != nil {
+		err = errors.New("修改检查单信息失败")
+		return
+	}
+	err = global.App.DB.Where("id = ?", params.ID).First(&check).Error
+	return
+}

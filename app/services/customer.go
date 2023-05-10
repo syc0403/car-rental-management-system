@@ -90,3 +90,13 @@ func (customerService *customerService) GetCustomerInfoByIdentity(identity strin
 	return
 
 }
+
+// GetCustomerByRentOrder 根据订单号获取客户信息
+func (customerService *customerService) GetCustomerByRentOrder(rentOrderIdentity string) (customer models.Customer, err error) {
+	db := global.App.DB.Model(&customer)
+	var customerId int
+	db.Table("rent_orders").Select("customer_id").Where("identity = ?", rentOrderIdentity).Scan(&customerId)
+	err = global.App.DB.Where("id = ?", customerId).First(&customer).Error
+	return
+
+}

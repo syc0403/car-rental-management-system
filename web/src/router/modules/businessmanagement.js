@@ -30,6 +30,12 @@ const businessmanagement = {
           meta: { title: '>>汽车入库'},
           
         },
+        {
+          path: 'checkmanagement',
+          name: '检查单管理',
+          component: () => import('@/views/businessmanagement/checkmanagement/index'),
+          meta: { title: '检查单管理' }
+        },
       ]
 }
 
