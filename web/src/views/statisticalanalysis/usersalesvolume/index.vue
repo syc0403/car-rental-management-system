@@ -22,15 +22,14 @@ export default {
   created() {
   },
   async mounted() {
-    const {data}  = await get("/check/getadresscount")
+    const {data}  = await get("/rentOrder/getmoneybyuser")
     var addressData = []
     var countData = []
     for (let i = 0; i < data.data.data.length; i++) {
-      addressData.push(data.data.data[i].address)
-      countData.push(data.data.data[i].count)
+      addressData.push(data.data.data[i].oper_name)
+      countData.push(data.data.data[i].money)
     }
-    console.log(countData);
-    let dataName = ['人数']
+    let dataName = ['金额']
     let option = JSON.parse(JSON.stringify(this.$refs.echary.getData))
     let series = []
     option.legend.data = dataName

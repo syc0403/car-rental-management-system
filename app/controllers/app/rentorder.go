@@ -118,3 +118,18 @@ func UpdateRentOrderStatus(c *gin.Context) {
 		response.Success(c, rentOrder)
 	}
 }
+
+// GetMoneyByUser 查询员工销售额
+func GetMoneyByUser(c *gin.Context) {
+	res, err := services.RentOrderService.GetMoneyByUser()
+	if err != nil {
+		response.BusinessFail(c, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"code":    200,
+		"message": "success",
+		"data": map[string]interface{}{
+			"data": res,
+		}})
+}

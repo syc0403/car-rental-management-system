@@ -2,6 +2,7 @@ package services
 
 import (
 	"car-rental-management-system/app/common/request"
+	"car-rental-management-system/app/common/response"
 	"car-rental-management-system/app/models"
 	"car-rental-management-system/global"
 	"car-rental-management-system/utils"
@@ -99,4 +100,18 @@ func (customerService *customerService) GetCustomerByRentOrder(rentOrderIdentity
 	err = global.App.DB.Where("id = ?", customerId).First(&customer).Error
 	return
 
+}
+
+// GetAdressCount 查询不同地区的客户数量
+func (customerService *customerService) GetAdressCount() (res []response.GetAdressCount, err error) {
+	db := global.App.DB
+	db.Table("customers").Select("address,COUNT(address) as count").Where("deleted_at is null").Group("address").Scan(&res)
+	return
+}
+
+// GetOccupationCount 查询不同职业的客户数量
+func (customerService *customerService) GetOccupationCount() (res []response.GetOccupationCount, err error) {
+	db := global.App.DB
+	db.Table("customers").Select("occupation,COUNT(occupation) as count").Where("deleted_at is null").Group("occupation").Scan(&res)
+	return
 }

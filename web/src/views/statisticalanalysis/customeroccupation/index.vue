@@ -22,11 +22,11 @@ export default {
   created() {
   },
   async mounted() {
-    const {data}  = await get("/check/getadresscount")
+    const {data}  = await get("/check/getoccupationcount")
     var addressData = []
     var countData = []
     for (let i = 0; i < data.data.data.length; i++) {
-      addressData.push(data.data.data[i].address)
+      addressData.push(data.data.data[i].occupation)
       countData.push(data.data.data[i].count)
     }
     console.log(countData);
@@ -37,7 +37,7 @@ export default {
     option.grid.top = '15%'
     option.xAxis[0].data = addressData
     dataName.map(res => {
-        series.push({ name: res, type: 'bar', data: countData })
+        series.push({ name: res, type: 'line', data: countData })
     })
     option.series = series
     this.option = JSON.parse(JSON.stringify(option))

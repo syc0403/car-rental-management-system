@@ -2,6 +2,7 @@ package services
 
 import (
 	"car-rental-management-system/app/common/request"
+	"car-rental-management-system/app/common/response"
 	"car-rental-management-system/app/models"
 	"car-rental-management-system/global"
 	"car-rental-management-system/utils"
@@ -82,5 +83,12 @@ func (rentOrderService *rentOrderService) UpdateRentOrder(params *request.Update
 		return
 	}
 	err = global.App.DB.Where("identity = ?", params.Identity).First(&rentOrde).Error
+	return
+}
+
+// GetMoneyByUser 查询员工销售额
+func (rentOrderService *rentOrderService) GetMoneyByUser() (res []response.GetMoneyByUser, err error) {
+	db := global.App.DB
+	db.Table("rent_orders").Select("oper_name,SUM(order_price) as money").Where("deleted_at is null").Group("oper_name").Scan(&res)
 	return
 }

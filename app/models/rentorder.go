@@ -15,6 +15,7 @@ type RentOrder struct {
 	Identity   string         `json:"identity" gorm:"type:varchar(255);not null;comment:订单编号"`
 	CarNumber  string         `json:"car_number" gorm:"type:varchar(255);not null;comment:车牌号"`
 	Status     int            `json:"status" gorm:"type:int(1);default:0;comment:出租状态(1:未归还,2:已归还)"`
+	OperName   string         `json:"oper_name" gorm:"type:varchar(255);comment:记录员名称"`
 	CreatedAt  time.Time      `json:"created_at"`
 	UpdatedAt  time.Time      `json:"updated_at"`
 	DeletedAt  gorm.DeletedAt `json:"deleted_at" gorm:"index"`
