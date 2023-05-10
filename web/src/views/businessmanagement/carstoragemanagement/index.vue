@@ -198,7 +198,6 @@ export default {
                 check_time: this.checkList.checkTime,
                 oper_name: this.$store.state.user.name
             }
-            console.log(params);
             const { data } = await post("/check/addcheck", params)
             if (data.code == 200) {
                 this.updateRentOrderStatus()

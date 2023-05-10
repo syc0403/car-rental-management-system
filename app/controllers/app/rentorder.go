@@ -133,3 +133,13 @@ func GetMoneyByUser(c *gin.Context) {
 			"data": res,
 		}})
 }
+
+// GetTotalMoney 查询总销售额
+func GetTotalMoney(c *gin.Context) {
+	res, err := services.RentOrderService.GetTotalMoney()
+	if err != nil {
+		response.BusinessFail(c, err.Error())
+		return
+	}
+	response.Success(c, res)
+}

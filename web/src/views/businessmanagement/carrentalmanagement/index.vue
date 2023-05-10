@@ -181,7 +181,9 @@ export default {
                 begin_date: this.rentData.dateRange[0],
                 return_date: this.rentData.dateRange[1],
                 identity: this.rentData.identity,
-                car_number: this.rentData.car_number
+                car_number: this.rentData.car_number,
+                oper_name: this.$store.state.user.name,
+                status: 1
             }
             const { data } = await post("/rentOrder/AddRentOrder", params);
             if (data.code == 200) {
@@ -226,14 +228,17 @@ export default {
     left: 50%;
     transform: translateX(-50%);
 }
+
 .lookup {
-  display: flex;
-  margin: 20px 20px;
+    display: flex;
+    margin: 20px 20px;
 }
+
 .aInput {
-  width: 70%;
+    width: 70%;
 }
+
 .btns {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 </style>

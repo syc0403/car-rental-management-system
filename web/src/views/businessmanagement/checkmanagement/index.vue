@@ -128,9 +128,8 @@ export default {
                 this.tableData[i].updated_at = dataTimeFormatter(
                     this.tableData[i].updated_at
                 );
-                this.tableData[i].customer_name = (await get("/customer/getcustomerbyrentorder", { rentorder_identity: "CZ_2316U960_1683472026" })).data.data.customer_name
+                this.tableData[i].customer_name = (await get("/customer/getcustomerbyrentorder", { rentorder_identity: this.searchDataList.rentorder_identity })).data.data.customer_name
             }
-            console.log(this.tableData);
         },
         async deleteData(id) {
             const confirmRes = await this.$confirm(
@@ -178,7 +177,7 @@ export default {
                     this.tableData[i].updated_at = dataTimeFormatter(
                         this.tableData[i].updated_at
                     );
-                    this.tableData[i].customer_name = (await get("/customer/getcustomerbyrentorder", { rentorder_identity: "CZ_2316U960_1683472026" })).data.data.customer_name
+                    this.tableData[i].customer_name = (await get("/customer/getcustomerbyrentorder", { rentorder_identity: this.searchDataList.rentorder_identity })).data.data.customer_name
                 }
             }
         },

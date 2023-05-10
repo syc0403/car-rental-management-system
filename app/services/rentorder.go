@@ -92,3 +92,10 @@ func (rentOrderService *rentOrderService) GetMoneyByUser() (res []response.GetMo
 	db.Table("rent_orders").Select("oper_name,SUM(order_price) as money").Where("deleted_at is null").Group("oper_name").Scan(&res)
 	return
 }
+
+// GetTotalMoney 查询总销售额
+func (rentOrderService *rentOrderService) GetTotalMoney() (res response.GetMoneyByUser, err error) {
+	db := global.App.DB
+	db.Table("rent_orders").Select("SUM(order_price) as money").Where("deleted_at is null").Scan(&res)
+	return
+}
